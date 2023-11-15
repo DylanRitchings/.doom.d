@@ -105,11 +105,12 @@
 (package! corfu)
 
 
-
 (package! orderless)
+
+  
 (package! dabbrev)
 (package! cape)
-(package! hotfuzz)
+;; (package! hotfuzz)
 (package! flx-rs)
 (package! fussy)
 ;; (package! straight)
@@ -121,3 +122,5 @@
 (package! with-editor
           :pin "bbc60f68ac190f02da8a100b6fb67cf1c27c53ab"
           :recipe (:host github :repo "magit/with-editor"))
+
+
