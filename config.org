@@ -13,6 +13,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq doom-font (font-spec :family "Source Code Pro" :size 15))
+
+
 #+END_SRC
 
 * QUICK FIX
@@ -78,33 +81,33 @@
     (shell-command-to-string "echo $OSTYPE")
    0 -1))
 
-(if (not (string= ostype "linux-android"))
-    (progn
+;; (if (not (string= ostype "linux-android"))
+;;     (progn
 
-    (define-key evil-motion-state-map "j" 'evil-backward-char)
-    (define-key evil-motion-state-map ";" 'evil-forward-char)
-    (define-key evil-motion-state-map "k" 'evil-next-line)
-    (define-key evil-motion-state-map "l" 'evil-previous-line)
+;;     (define-key evil-motion-state-map "j" 'evil-backward-char)
+;;     (define-key evil-motion-state-map ";" 'evil-forward-char)
+;;     (define-key evil-motion-state-map "k" 'evil-next-line)
+;;     (define-key evil-motion-state-map "l" 'evil-previous-line)
 
-    (map! :after ranger
-        :map ranger-mode-map
-        "j" 'ranger-up-directory
-        ";" 'ranger-find-file
-        "k" 'ranger-next-file
-        "l" 'ranger-prev-file)
+;;     (map! :after ranger
+;;         :map ranger-mode-map
+;;         "j" 'ranger-up-directory
+;;         ";" 'ranger-find-file
+;;         "k" 'ranger-next-file
+;;         "l" 'ranger-prev-file)
 
-    (map! :after magit
-        :map magit-mode-map
-        "j" 'magit-dispatch
-        ";" 'magit-log
-        "k" 'evil-next-visual-line
-        "l" 'evil-previous-visual-line)
+;;     (map! :after magit
+;;         :map magit-mode-map
+;;         "j" 'magit-dispatch
+;;         ";" 'magit-log
+;;         "k" 'evil-next-visual-line
+;;         "l" 'evil-previous-visual-line)
 
-))
+;; ))
 
-(map!
-      :n "C-M-s-j" #'evil-backward-paragraph
-      :n "C-M-s-k" #'evil-forward-paragraph)
+;; (map!
+;;       :n "C-M-s-j" #'evil-backward-paragraph
+;;       :n "C-M-s-k" #'evil-forward-paragraph)
 
 #+END_SRC
 
@@ -277,14 +280,53 @@
 (setq! shell-command-switch "-c")
 
 (defun open-iterm ()
-  (interactive)
-  (shell-command "open -a iterm.app ."))
+    (interactive)
+    (shell-command "open -a iterm.app ."))
 
-(map! :leader
-      (:prefix ("z")
-      :desc "Open current location in iterm"
-      "x" #'open-iterm
-      ))
+(defun open-winterm ()
+    (interactive)
+    (shell-command "wt.exe -w 1 -d ."))
+
+(defun open-explorer ()
+    (interactive)
+    (shell-command "explorer ."))
+
+
+(if (eq system-type 'darwin)
+    (progn
+
+    (map! :leader
+        (:prefix ("o")
+        :desc "Open . in iterm"
+        "t" #'open-iterm
+        ))
+    (setq shell-file-name "zsh")
+
+    ;;VTERM
+    (setq shell-default-shell multi-vterm)
+    ))
+
+(if (eq system-type 'windows-nt)
+    (progn
+
+    (map! :leader
+        (:prefix ("o")
+        :desc "Open . in winterm"
+        "t" #'open-winterm
+        ))
+
+    (map! :leader
+        (:prefix ("o")
+        :desc "Open . in explorer"
+        "e" #'open-explorer
+        ))
+
+    ;; (setq dotspacemacs-persistent-server t)
+    (setq shell-file-name "C:\\Users\\dylan.ritchings\\dev\\software\\Git\\usr\\bin\\zsh.exe")
+    (setq explicit-shell-file-name "C:\\Users\\dylan.ritchings\\dev\\software\\Git\\usr\\bin\\zsh.exe")
+    (setq shell-default-shell 'shell)
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+    ))
 
 #+END_SRC
 
