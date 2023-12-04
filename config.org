@@ -395,36 +395,6 @@
       )
 #+end_SRC
 
-** LSP
-*** UI
-
-#+BEGIN_SRC emacs-lisp
-;; (after! lsp-ui
-;; (setq! lsp-ui-sideline t)
-;; (setq! lsp-ui-sideline-show-hover t)
-;; (setq! lsp-ui-sideline-enable t)
-;; (setq! lsp-ui-doc-enable t)
-;; (setq! lsp-ui-doc-show-with-cursor t)
-;; (setq! lsp-ui-doc-position "top")
-;; (setq! lsp-ui-flycheck-enable t)
-;; (setq! lsp-ui-sideline-show-flycheck t)
-;; (setq! lsp-use-plists t)
-;; )
-#+END_SRC
-
-*** Hook
-#+BEGIN_SRC emacs-lisp
-;; (defun dotfiles--lsp-deferred-if-supported ()
-;;   "Run `lsp-deferred' if it's a supported mode."
-;;   (unless (derived-mode-p 'emacs-lisp-mode)
-;;     (lsp-deferred)))
-
-;; (setq! lsp-log-io nil)
-;; (add-hook! 'prog-mode-hook 'dotfiles--lsp-deferred-if-supported)
-;; (add-hook! 'terraform-mode 'lsp-mode)
-;; (add-hook! 'python-mode 'lsp-mode)
-#+END_SRC
-
 *** Terraform
 ** Company/corfu WIP
 
