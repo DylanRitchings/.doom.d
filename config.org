@@ -504,15 +504,6 @@ debugging scala
       "s" #'vterm-sbt))
 #+end_src
 
-** Python
-#+begin_src emacs-lisp
-;; (elpy-enable)
-#+end_src
-** Java
-#+begin_src emacs-lisp
-
-#+end_src
-
 
 * Visual
 ** Bookmark
