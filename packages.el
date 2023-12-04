@@ -102,14 +102,14 @@
 
 (package! elpy)
 
-(package! corfu)
+;; (package! corfu)
 
-
+(package! company-quickhelp)
 
 (package! orderless)
 (package! dabbrev)
 (package! cape)
-(package! hotfuzz)
+;; (package! hotfuzz)
 (package! flx-rs)
 (package! fussy)
 ;; (package! straight)
