@@ -303,7 +303,6 @@
     (setq shell-file-name "zsh")
 
     ;;VTERM
-    (setq shell-default-shell multi-vterm)
     ))
 
 (if (eq system-type 'windows-nt)
