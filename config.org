@@ -113,19 +113,19 @@
 
 ** Window movement
 #+BEGIN_SRC emacs-lisp
-(map! :leader
-    ;; Navigation
-    "<left>"     #'evil-window-left
-    "<down>"     #'evil-window-down
-    "<up>"       #'evil-window-up
-    "<right>"    #'evil-window-right
-    ;; Swapping windows
-    "C-<left>"       #'+evil/window-move-left
-    "C-<down>"       #'+evil/window-move-down
-    "C-<up>"         #'+evil/window-move-up
-    "C-<right>"      #'+evil/window-move-right
-    "M-<right>" #'evil-window-vsplit
-    "M-<down>" #'evil-window-split)
+;; (map! :leader
+;;     ;; Navigation
+;;     "<left>"     #'evil-window-left
+;;     "<down>"     #'evil-window-down
+;;     "<up>"       #'evil-window-up
+;;     "<right>"    #'evil-window-right
+;;     ;; Swapping windows
+;;     "C-<left>"       #'+evil/window-move-left
+;;     "C-<down>"       #'+evil/window-move-down
+;;     "C-<up>"         #'+evil/window-move-up
+;;     "C-<right>"      #'+evil/window-move-right
+;;     "M-<right>" #'evil-window-vsplit
+;;     "M-<down>" #'evil-window-split)
 #+END_SRC
 ** Copy Paste
 #+BEGIN_SRC emacs-lisp
