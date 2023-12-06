@@ -87,6 +87,8 @@
 
 (package! dap-mode)
 
+(package! feature-mode)
+
 ;;(package! sbt-mode
 ;;  :commands sbt-start sbt-command
 ;;  :config

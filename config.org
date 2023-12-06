@@ -81,37 +81,50 @@
     (shell-command-to-string "echo $OSTYPE")
    0 -1))
 
-;; (if (not (string= ostype "linux-android"))
-;;     (progn
-
-;;     (define-key evil-motion-state-map "j" 'evil-backward-char)
-;;     (define-key evil-motion-state-map ";" 'evil-forward-char)
-;;     (define-key evil-motion-state-map "k" 'evil-next-line)
-;;     (define-key evil-motion-state-map "l" 'evil-previous-line)
-
-;;     (map! :after ranger
-;;         :map ranger-mode-map
-;;         "j" 'ranger-up-directory
-;;         ";" 'ranger-find-file
-;;         "k" 'ranger-next-file
-;;         "l" 'ranger-prev-file)
-
-;;     (map! :after magit
-;;         :map magit-mode-map
-;;         "j" 'magit-dispatch
-;;         ";" 'magit-log
-;;         "k" 'evil-next-visual-line
-;;         "l" 'evil-previous-visual-line)
-
-;; ))
-
-;; (map!
-;;       :n "C-M-s-j" #'evil-backward-paragraph
-;;       :n "C-M-s-k" #'evil-forward-paragraph)
-
 #+END_SRC
+*** Scroll up/down
+#+begin_src emacs-lisp
 
-** Window movement
+;; (defun center-cursor ()
+;;   "Center the cursor on the middle line of the current window."
+;;   (interactive)
+;;   (let* (
+;;         (line-at-window-start (line-number-at-pos (window-start)))
+;;         (line-at-window-end (line-number-at-pos (window-end)))
+;;         (lines-in-window (- line-at-window-end line-at-window-start))
+;;         (middle-line (+ line-at-window-start (/ lines-in-window 2))))
+;;         (message "line-at-window-start: %s" line-at-window-start)
+;;         (message "line-at-window-end: %s" line-at-window-end)
+;;         (message "lines-in-window: %s" lines-in-window)
+;;         (message "middle-line: %s" middle-line)
+;;     (goto-line middle-line)))
+
+;; (defun center-scroll-down (&optional count)
+;;   ;; (evil-scroll-down)
+;;     (evil-scroll-up)
+;;     (recenter))
+
+;; (defun center-scroll-up ()
+;;   (interactive)
+;;   (evil-scroll-up)
+;;   (recenter)
+;; )
+
+;; (after! evil
+;;   (map!
+;;    :n "C-d" 'center-scroll-down
+;;    :n "C-u" 'center-scroll-up)
+;;                 )
+(defun my-evil-scroll-advice (&rest _)
+  "Advice function to run recenter after evil-scroll."
+  (recenter))
+
+(advice-add 'evil-scroll-up :after #'my-evil-scroll-advice)
+
+(advice-add 'evil-scroll-down :after #'my-evil-scroll-advice)
+
+  #+end_src
+*** Window movement
 #+BEGIN_SRC emacs-lisp
 ;; (map! :leader
 ;;     ;; Navigation
@@ -368,7 +381,7 @@
 
 * Package configs
 ** Centaur tabs
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (setq! centaur-tabs-style "bar"
       centaur-tabs-headline-match t
       centaur-tabs-set-bar 'over
@@ -382,7 +395,7 @@
 #+END_SRC
 
 *** Bindings
-#+begin_SRC emacs-lisp
+#+begin_SRC emacs-lisp :tangle no
 (map! :leader
       :desc "tab forward"
       "l" #'centaur-tabs-forward
@@ -506,6 +519,12 @@ debugging scala
 
 
 * Visual
+** Visual line number
+#+begin_src emacs-lisp
+
+(setq display-line-numbers-type 'relative)
+
+#+end_src
 ** Bookmark
 #+begin_src emacs-lisp
 (map! :leader
