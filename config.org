@@ -264,6 +264,14 @@
 
 (map! :nv "m" #'evil-set-marker)
 #+end_src
+** git
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("g")
+        :desc "next conflict"
+        "n" #'smerge-vc-next-conflict
+            ))
+#+end_src
 
 * Ease Of Use
 
@@ -376,8 +384,6 @@
 
 #+end_SRC
 
-#+RESULTS:
-: doom/iterm2-run
 
 * Package configs
 ** Centaur tabs
@@ -394,28 +400,16 @@
 (centaur-tabs-mode t)
 #+END_SRC
 
-*** Bindings
-#+begin_SRC emacs-lisp :tangle no
-(map! :leader
-      :desc "tab forward"
-      "l" #'centaur-tabs-forward
-      :desc "tab backwards"
-      "k" #'centaur-tabs-backward
-      :desc "buffer-forward"
-      ";" #'next-buffer
-      :desc "buffer-backwards"
-      "j" #'previous-buffer
-      )
-#+end_SRC
-
-*** Terraform
 ** Company/corfu WIP
 
 #+begin_src emacs-lisp
 
 (company-quickhelp-mode 1)
 (after! company-quickhelp
-  (setq company-quickhelp-delay 0.5))
+  (setq company-quickhelp-delay 0))
+
+(setq company-idle-delay 0)
+
 ;; ;; Add extensions
 
 ;; ;; Use Dabbrev with Corfu!
@@ -490,17 +484,16 @@
 ;; (add-hook! 'after-init-hook 'global-company-mode)
 #+END_SRC
 * Languages
-** Scala
-*** sbt mode
+** Python
+*** flycheck
 #+begin_src emacs-lisp
+;; (after! flycheck
+;;   (setq flycheck-python-pyright-executable "python-pyright"))
 
-#+end_src
-*** metals
-debugging scala
-#+begin_src emacs-lisp
-(add-hook! scala-mode-hook dap-mode)
-(add-hook! scala-mode-hook dap-ui-mode)
-(setq! lsp-metals-super-method-lenses-enabled t)
+;; (flycheck)
+
+(after! flycheck-mode
+   (flycheck-add-next-checker 'lsp 'python-pyright))
 #+end_src
 *** run in zshell
 #+begin_src emacs-lisp
@@ -517,12 +510,12 @@ debugging scala
       "s" #'vterm-sbt))
 #+end_src
 
-
 * Visual
-** Visual line number
+** Line numbers
 #+begin_src emacs-lisp
 
 (setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode +1)
 
 #+end_src
 ** Bookmark
@@ -545,7 +538,7 @@ debugging scala
 #+end_src
 
 ** Startup
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 (defun ascii-art ()
   (let* ((banner '(
@@ -694,16 +687,5 @@ debugging scala
 (if (string= ostype "linux-android")
     (setq! +doom-dashboard--width 30)
 )
-
-#+end_src
-
-* Printing
-#+begin_src emacs-lisp
-
-(setq! lpr-switches
-      (append '("-P" "DeskJet_2700"
-                "-o" "sides=two-sided-long-edge"
-                "-o" "number-up=2")
-              lpr-switches))
 
 #+end_src
