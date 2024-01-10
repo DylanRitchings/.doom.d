@@ -322,8 +322,6 @@
         "t" #'open-iterm
         ))
     (setq shell-file-name "zsh")
-
-    ;;VTERM
     ))
 
 (if (eq system-type 'windows-nt)
