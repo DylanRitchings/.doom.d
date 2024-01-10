@@ -13,8 +13,7 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-(setq doom-font (font-spec :family "Source Code Pro" :size 15))
-
+(setq doom-font (font-spec :family "Source Code Pro" :size 17))
 
 #+END_SRC
 
@@ -55,18 +54,19 @@
 #+END_SRC
 ** Straight package manager
 #+begin_src emacs-lisp
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+(defvar bootstrap-version
+    (let ((bootstrap-file
+        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 6))
+    (unless (file-exists-p bootstrap-file)
+        (with-current-buffer
+            (url-retrieve-synchronously
+            "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+            'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+)
 #+end_src
 
 * Basic and Navigation Bindings
@@ -100,7 +100,7 @@
 ;;     (goto-line middle-line)))
 
 ;; (defun center-scroll-down (&optional count)
-;;   ;; (evil-scroll-down)
+;;   ;;
 ;;     (evil-scroll-up)
 ;;     (recenter))
 
@@ -403,12 +403,19 @@
 ** Company/corfu WIP
 
 #+begin_src emacs-lisp
+;; (defvar my/project-root (projectile-project-root) "The root directory of the current project.")
+
+;; (after! lsp-python-ms
+;;   (setq lsp-python-ms-auto-install-server t
+;;         lsp-python-ms-auto-install-server-url nil
+;;         lsp-python-ms-extra-paths `(,(concat my/project-root "venv/bin/python"))))
 
 (company-quickhelp-mode 1)
 (after! company-quickhelp
   (setq company-quickhelp-delay 0))
 
 (setq company-idle-delay 0)
+(ffap-bindings)
 
 ;; ;; Add extensions
 
