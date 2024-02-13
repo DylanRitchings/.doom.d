@@ -383,6 +383,14 @@
 #+end_SRC
 
 
+
+
+
+** multicursor
+#+begin_src emacs-lisp
+(map! :n "M-d" #'evil-mc-make-and-goto-next-match)
+(map! :n "M-D" #'evil-mc-make-and-goto-previous-match)
+#+end_src
 * Package configs
 ** Centaur tabs
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -397,6 +405,7 @@
   (centaur-tabs-group-by-projectile-project))
 (centaur-tabs-mode t)
 #+END_SRC
+
 
 ** Company/corfu WIP
 
