@@ -8,7 +8,8 @@
      "6c98bc9f39e8f8fd6da5b9c74a624cbb3782b4be8abae8fd84cbc43053d7c175"
      "6f4421bf31387397f6710b6f6381c448d1a71944d9e9da4e0057b3fe5d6f2fad" default))
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
- '(package-selected-packages '(feature-mode lsp-ui dumb-jump powershell))
+ '(package-selected-packages
+   '(ob-ipython jupyter feature-mode lsp-ui dumb-jump powershell))
  '(warning-suppress-log-types
    '((lsp-mode) (server) (server) (server) (server) (server)
      (doom-first-input-hook) (doom-first-input-hook) (doom-first-input-hook)
@@ -23,5 +24,6 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-face ((t (:foreground "SlateBlue1"))))
  '(line-number ((t (:foreground "#b8b8b8"))))
- '(line-number-current-line ((t (:foreground "#9c78e3")))))
+ '(line-number-current-line ((t (:foreground "#9c78e3"))))
+ '(ts-fold-replacement-face ((t (:foreground unspecified :box nil :inherit font-lock-comment-face :weight light)))))
 (put 'projectile-ag 'disabled nil)
