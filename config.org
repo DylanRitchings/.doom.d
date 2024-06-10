@@ -384,9 +384,6 @@
 #+end_SRC
 
 
-
-
-
 ** multicursor
 #+begin_src emacs-lisp
 (after! multicursor
