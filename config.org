@@ -383,9 +383,6 @@
 #+end_SRC
 
 
-
-
-
 ** multicursor
 #+begin_src emacs-lisp
 (map! :n "M-d" #'evil-mc-make-and-goto-next-match)
