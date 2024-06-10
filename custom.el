@@ -35,5 +35,6 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-face ((t (:foreground "SlateBlue1"))))
  '(line-number ((t (:foreground "#b8b8b8"))))
- '(line-number-current-line ((t (:foreground "#9c78e3")))))
+ '(line-number-current-line ((t (:foreground "#9c78e3"))))
+ '(ts-fold-replacement-face ((t (:foreground unspecified :box nil :inherit font-lock-comment-face :weight light)))))
 (put 'projectile-ag 'disabled nil)

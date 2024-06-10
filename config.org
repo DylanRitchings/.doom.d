@@ -14,7 +14,8 @@
 (setq display-line-numbers-type t)
 
 (setq doom-font (font-spec :family "Source Code Pro" :size 17))
-
+(setq! lsp-enable-file-watchers t)
+(setq! lsp-file-watch-threshold 8000)
 #+END_SRC
 
 * QUICK FIX
@@ -385,8 +386,10 @@
 
 ** multicursor
 #+begin_src emacs-lisp
-(map! :n "M-d" #'evil-mc-make-and-goto-next-match)
-(map! :n "M-D" #'evil-mc-make-and-goto-previous-match)
+(after! multicursor
+    (map! :n "M-d" #'evil-mc-make-and-goto-next-match)
+    (map! :n "M-D" #'evil-mc-make-and-goto-previous-match)
+)
 #+end_src
 * Package configs
 ** Centaur tabs
@@ -496,6 +499,51 @@
 #+END_SRC
 * Languages
 ** Python
+*** ipython
+#+begin_src emacs-lisp
+
+;; (after! code-cells-mode #'code-cells-convert-ipynb)
+;; (add-hook! 'python-mode-hook 'code-cells-config)
+;; (setq buffer-file-name (convert-standard-filename buffer-file-name))
+
+;; (add-to-list 'auto-mode-alist '("\\.ipynb\\'" . code-cells-mode))
+;; (add-hook! 'python-mode-hook 'code-cells-mode-maybe)
+;; (after! ein-ipynb-mode
+;;        (code-cells-convert-ipynb)
+;;        (python-mode))
+
+;; (setq! lsp-python-ms-python-executable-cmd "pipenv run python")
+;; (setq! pythonic-interpreter "pipenv run python")
+;; (setq! python-shell-interpreter "pipenv run python")
+
+;; (setq! elpy-rpc-python-command "pipenv run python")
+
+(map! :leader
+      (:prefix ("l" . "ipynb")
+      :desc "insert markdown cell"
+      "m" #'insert-markdown-cell
+      :desc "insert code cell"
+      "c" #'insert-code-cell
+      :desc "previous cell"
+      "k" #'code-cells-backward-cell
+      :desc "next cell"
+      "j" #'code-cells-forward-cel
+      :desc "move cell up"
+      "k" #'code-cells-move-cell-up
+      :desc "move cell down"
+      "j" #'code-cells-move-cell-down
+      :desc "eval cell"
+      "e" #'code-cells-eval
+      ))
+
+;; (map! leader)
+;;   (define-key evil-normal-state-map (kbd ", j m") 'insert-markdown-cell)
+;;   (define-key evil-normal-state-map (kbd ", j c") 'insert-code-cell)
+;;   (define-key evil-normal-state-map (kbd ", j e") 'code-cells-eval-all)
+;;   (define-key evil-normal-state-map (kbd ", j r") 'code-cells-eval)
+;;   (define-key evil-normal-state-map (kbd ", j l") 'code-cells-move-cell-up)
+;;   (define-key evil-normal-state-map (kbd ", j k") 'code-cells-move-cell-down)
+#+end_src
 *** flycheck
 #+begin_src emacs-lisp
 ;; (after! flycheck
@@ -505,7 +553,12 @@
 
 (after! flycheck-mode
    (flycheck-add-next-checker 'lsp 'python-pyright))
+
+
+(add-hook 'python-mode-hook #'flymake-ruff-load)
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
 #+end_src
+
 *** run in zshell
 #+begin_src emacs-lisp
 (defun vterm-sbt ()
@@ -515,12 +568,19 @@
   (vterm "/usr/bin/zsh" "sbt")
   )
 
+
 (map! :leader
       (:prefix ("z" . "Shell")
       :desc "Run Scala"
       "s" #'vterm-sbt))
 #+end_src
 
+** XML
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.iwxxm\\'" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
+(global-so-long-mode -1)
+#+end_src
 * Visual
 ** Line numbers
 #+begin_src emacs-lisp
