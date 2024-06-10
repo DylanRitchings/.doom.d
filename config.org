@@ -14,7 +14,8 @@
 (setq display-line-numbers-type t)
 
 (setq doom-font (font-spec :family "Source Code Pro" :size 17))
-
+(setq! lsp-enable-file-watchers t)
+(setq! lsp-file-watch-threshold 8000)
 #+END_SRC
 
 * QUICK FIX
@@ -388,8 +389,10 @@
 
 ** multicursor
 #+begin_src emacs-lisp
-(map! :n "M-d" #'evil-mc-make-and-goto-next-match)
-(map! :n "M-D" #'evil-mc-make-and-goto-previous-match)
+(after! multicursor
+    (map! :n "M-d" #'evil-mc-make-and-goto-next-match)
+    (map! :n "M-D" #'evil-mc-make-and-goto-previous-match)
+)
 #+end_src
 * Package configs
 ** Centaur tabs
@@ -553,6 +556,10 @@
 
 (after! flycheck-mode
    (flycheck-add-next-checker 'lsp 'python-pyright))
+
+
+(add-hook 'python-mode-hook #'flymake-ruff-load)
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
 #+end_src
 
 *** run in zshell
@@ -563,6 +570,7 @@
   (other-window 1)
   (vterm "/usr/bin/zsh" "sbt")
   )
+
 
 (map! :leader
       (:prefix ("z" . "Shell")

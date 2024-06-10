@@ -9,7 +9,8 @@
      "6f4421bf31387397f6710b6f6381c448d1a71944d9e9da4e0057b3fe5d6f2fad" default))
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(package-selected-packages
-   '(ob-ipython jupyter feature-mode lsp-ui dumb-jump powershell))
+   '(flymake-ruff ruff-format org-view-mode ob-ipython jupyter feature-mode lsp-ui
+     dumb-jump powershell))
  '(warning-suppress-log-types
    '((lsp-mode) (server) (server) (server) (server) (server)
      (doom-first-input-hook) (doom-first-input-hook) (doom-first-input-hook)

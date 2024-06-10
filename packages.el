@@ -130,3 +130,6 @@
 
 (package! code-cells)
 (package! multiple-cursors)
+
+(package! ruff-format)
+(package! flymake-ruff)
